@@ -1,4 +1,5 @@
 import streamlit as st
+
 # Define the Streamlit app
 st.title("Energy Consumption Estimator")
 
@@ -108,6 +109,9 @@ if st.button("Calculate Consumption"):
     # Provide a sustainability quote with styling
     st.markdown("<h3 style='color: green; font-weight: bold;'>Sustainability Tip:</h3>", unsafe_allow_html=True)
     st.markdown("<p style='color: blue; font-weight: bold;'>Every small action counts! Save energy, save the planet.</p>", unsafe_allow_html=True)
+
+# Footer or closing message
+st.write("Thank you for using the Energy Consumption Estimator. Stay energy efficient!")
 
 # Run the app
 if __name__ == '__main__':
