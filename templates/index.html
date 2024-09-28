@@ -43,7 +43,6 @@
             max-width: 500px;
             width: 80%;
             padding: 30px;
-            /* Remove background-color property to make it transparent */
             border-radius: 10px;
             box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
             transform: translateY(0);
@@ -121,31 +120,41 @@
 <body>
     <h1>💡ENERGY CONSUMPTION PREDICTION💡</h1>
     <form method="post" action="/predict">
-        <label for="Global_active_power">Global Active Power</label>
-        <input type="text" name="Global_active_power" id="Global_active_power" required>
+        <label for="num_appliances">Number of Appliances</label>
+        <input type="number" name="num_appliances" id="num_appliances" min="1" required>
 
-        <label for="Global_reactive_power">Global Reactive Power</label>
-        <input type="text" name="Global_reactive_power" id="Global_reactive_power" required>
-
-        <label for="Voltage">Voltage</label>
-        <input type="text" name="Voltage" id="Voltage" required>
-
-        <label for="Global_intensity">Global Intensity</label>
-        <input type="text" name="Global_intensity" id="Global_intensity" required>
-
-        <label for="Total_metering">Total Metering</label>
-        <input type="text" name="Total_metering" id="Total_metering" required>
+        <div id="appliance-details">
+            <!-- Appliance details will be added dynamically with JavaScript -->
+        </div>
 
         <input type="submit" value="Predict">
     </form>
+
+    <script>
+        document.getElementById('num_appliances').addEventListener('input', function() {
+            const numAppliances = this.value;
+            const applianceDetailsDiv = document.getElementById('appliance-details');
+            applianceDetailsDiv.innerHTML = ''; // Clear previous inputs
+
+            for (let i = 0; i < numAppliances; i++) {
+                applianceDetailsDiv.innerHTML += `
+                    <fieldset>
+                        <legend>Appliance ${i + 1}</legend>
+                        <label for="appliance_name_${i}">Appliance Name:</label>
+                        <input type="text" name="appliance_name_${i}" id="appliance_name_${i}" required>
+
+                        <label for="power_rating_${i}">Power Rating (W):</label>
+                        <input type="number" name="power_rating_${i}" id="power_rating_${i}" required>
+
+                        <label for="num_units_${i}">Number of Units:</label>
+                        <input type="number" name="num_units_${i}" id="num_units_${i}" min="0" required>
+
+                        <label for="usage_hours_${i}">Usage Hours per Day:</label>
+                        <input type="number" name="usage_hours_${i}" id="usage_hours_${i}" min="0" step="0.1" required>
+                    </fieldset>
+                `;
+            }
+        });
+    </script>
 </body>
 </html>
-
-
-
-
-
-
-
-
-
